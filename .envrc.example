@@ -1,0 +1,2 @@
+export ATPROTO_BOT_HANDLE="foobar"
+export ATPROTO_BOT_PASSWORD="fizzbuzz"
