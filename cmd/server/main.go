@@ -3,12 +3,16 @@ package main
 import (
 	"context"
 	"fmt"
-	"golang.org/x/exp/slog"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/bluesky-social/indigo/xrpc"
+	"github.com/vvakame/atproto-vvvot/httpapi"
+	"github.com/vvakame/atproto-vvvot/internal/cliutils"
+	"golang.org/x/exp/slog"
 )
 
 func main() {
@@ -22,11 +26,32 @@ func main() {
 		port = "8080"
 	}
 
+	xrpcc := &xrpc.Client{
+		Client: http.DefaultClient,
+		Host:   "https://bsky.social",
+	}
+
+	auth, err := cliutils.LoadAuthInfo(ctx, xrpcc)
+	if err != nil {
+		slog.Error("error on cliutils.LoadAuthInfo", "error", err)
+		panic(err)
+	}
+
+	xrpcc.Auth = auth
+
+	mux := http.NewServeMux()
+
+	h, err := httpapi.New(xrpcc)
+	if err != nil {
+		slog.Error("error on httpapi.New", "error", err)
+		panic(err)
+	}
+
+	h.Serve(mux)
+
 	srv := &http.Server{
-		Addr: fmt.Sprintf(":%s", port),
-		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			fmt.Fprintln(w, "Hello, World!")
-		}),
+		Addr:    fmt.Sprintf(":%s", port),
+		Handler: mux,
 	}
 
 	go func() {
@@ -41,7 +66,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	err := srv.Shutdown(ctx)
+	err = srv.Shutdown(ctx)
 	if err != nil {
 		slog.Error("error received from srv.Shutdown", "error", err)
 		panic(err)
