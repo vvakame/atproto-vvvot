@@ -25,9 +25,10 @@ func ProcessNotifications(ctx context.Context, xrpcc *xrpc.Client) ([]Response, 
 
 	slog.DebugCtx(ctx, "check unread count", "count", unreadResp.Count)
 
-	var respList []Response
+	respList := make([]Response, 0)
 	limit := int64(20)
 	var cursor string
+OUTER:
 	for {
 		resp, err := bsky.NotificationListNotifications(ctx, xrpcc, cursor, limit)
 		if err != nil {
@@ -36,6 +37,7 @@ func ProcessNotifications(ctx context.Context, xrpcc *xrpc.Client) ([]Response, 
 		}
 
 		slog.DebugCtx(ctx, "response about app.bsky.notification.listNotifications", "cursor", resp.Cursor, "length", len(resp.Notifications))
+
 		for idx, nf := range resp.Notifications {
 			slog.DebugCtx(
 				ctx,
@@ -43,12 +45,29 @@ func ProcessNotifications(ctx context.Context, xrpcc *xrpc.Client) ([]Response, 
 				"index", idx,
 				"reason", nf.Reason,
 				"author", nf.Author.Handle,
+				"cid", nf.Cid,
 				"isRead", nf.IsRead,
 			)
 
 			switch v := nf.Record.Val.(type) {
 			case *bsky.FeedPost:
 				slog.DebugCtx(ctx, "feed post", "author", nf.Author.Did, "text", v.Text)
+
+				if !isMentionedToMe(ctx, xrpcc.Auth, v) {
+					slog.DebugCtx(ctx, "this post doesn't mentioned to me")
+					continue
+				}
+
+				threadResp, err := bsky.FeedGetPostThread(ctx, xrpcc, 10, nf.Uri)
+				if err != nil {
+					slog.Error("error raised by app.bsky.feed.getPostThread", "error", err)
+					return nil, err
+				}
+
+				if isRepliedAlready(ctx, xrpcc.Auth, threadResp) {
+					slog.DebugCtx(ctx, "found newest replied post", "cid", nf.Cid)
+					break OUTER
+				}
 
 				switch {
 				case isReplyDIDRequest(ctx, xrpcc.Auth, v):
@@ -102,5 +121,5 @@ func ProcessNotifications(ctx context.Context, xrpcc *xrpc.Client) ([]Response, 
 
 	slog.DebugCtx(ctx, "update notification seen", "now", now)
 
-	return nil, nil
+	return respList, nil
 }

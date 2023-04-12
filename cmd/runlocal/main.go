@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 
+	comatproto "github.com/bluesky-social/indigo/api/atproto"
 	cliutil "github.com/bluesky-social/indigo/cmd/gosky/util"
 	"github.com/bluesky-social/indigo/xrpc"
 	"github.com/k0kubun/pp/v3"
@@ -29,6 +30,13 @@ func main() {
 	}
 
 	xrpcc.Auth = auth
+
+	defer func() {
+		err := comatproto.ServerDeleteSession(ctx, xrpcc)
+		if err != nil {
+			slog.Error("error raised by com.atproto.server.deleteSession", "error", err)
+		}
+	}()
 
 	respList, err := vvvot.ProcessNotifications(ctx, xrpcc)
 	if err != nil {
