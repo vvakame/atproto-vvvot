@@ -23,13 +23,11 @@ func main() {
 		Host:   "https://bsky.social",
 	}
 
-	auth, err := cliutils.LoadAuthInfo(ctx, xrpcc)
+	err := cliutils.CheckTokenExpired(ctx, xrpcc)
 	if err != nil {
-		slog.Error("error on cliutils.LoadAuthInfo", "error", err)
+		slog.Error("error on cliutils.CheckTokenExpired", "error", err)
 		panic(err)
 	}
-
-	xrpcc.Auth = auth
 
 	defer func() {
 		err := comatproto.ServerDeleteSession(ctx, xrpcc)

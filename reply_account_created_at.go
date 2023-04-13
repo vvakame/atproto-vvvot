@@ -3,13 +3,14 @@ package vvvot
 import (
 	"context"
 	"fmt"
-	comatproto "github.com/bluesky-social/indigo/api/atproto"
-	lexutil "github.com/bluesky-social/indigo/lex/util"
 	"strings"
 	"time"
 
+	comatproto "github.com/bluesky-social/indigo/api/atproto"
 	"github.com/bluesky-social/indigo/api/bsky"
+	lexutil "github.com/bluesky-social/indigo/lex/util"
 	"github.com/bluesky-social/indigo/xrpc"
+	"go.opentelemetry.io/otel"
 	"golang.org/x/exp/slog"
 )
 
@@ -31,7 +32,15 @@ func isReplyAccountCreatedAtRequest(ctx context.Context, me *xrpc.AuthInfo, feed
 	return s == "birthday"
 }
 
-func replyAccountCreatedAt(ctx context.Context, xrpcc *xrpc.Client, nf *bsky.NotificationListNotifications_Notification) (Response, error) {
+func replyAccountCreatedAt(ctx context.Context, xrpcc *xrpc.Client, nf *bsky.NotificationListNotifications_Notification) (_ Response, err error) {
+	ctx, span := otel.Tracer("vvvot").Start(ctx, "replyAccountCreatedAt")
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+		}
+		span.End()
+	}()
+
 	var foundIndexedAt bool
 	var text string
 	if nf.Author.IndexedAt != nil && *nf.Author.IndexedAt != "" {

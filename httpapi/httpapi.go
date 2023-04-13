@@ -7,6 +7,7 @@ import (
 
 	"github.com/bluesky-social/indigo/xrpc"
 	vvvot "github.com/vvakame/atproto-vvvot"
+	"github.com/vvakame/atproto-vvvot/internal/cliutils"
 	"golang.org/x/exp/slog"
 )
 
@@ -26,10 +27,18 @@ func (h *Handler) Serve(mux *http.ServeMux) {
 	mux.HandleFunc("/api/processNotifications", func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 
-		err := h.ProcessNotifications(ctx)
+		err := cliutils.CheckTokenExpired(ctx, h.xrpcc)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			slog.ErrorCtx(ctx, "error on cliutils.CheckTokenExpired", "error", err)
+			return
+		}
+
+		err = h.ProcessNotifications(ctx)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			slog.ErrorCtx(ctx, "failed to process notifications", "error", err)
+			return
 		}
 	})
 }

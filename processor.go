@@ -7,6 +7,7 @@ import (
 
 	"github.com/bluesky-social/indigo/api/bsky"
 	"github.com/bluesky-social/indigo/xrpc"
+	"go.opentelemetry.io/otel"
 	"golang.org/x/exp/slog"
 )
 
@@ -14,7 +15,15 @@ type Response interface {
 	isResponse()
 }
 
-func ProcessNotifications(ctx context.Context, xrpcc *xrpc.Client) ([]Response, error) {
+func ProcessNotifications(ctx context.Context, xrpcc *xrpc.Client) (_ []Response, err error) {
+	ctx, span := otel.Tracer("vvvot").Start(ctx, "ProcessNotifications")
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+		}
+		span.End()
+	}()
+
 	now := time.Now()
 
 	unreadResp, err := bsky.NotificationGetUnreadCount(ctx, xrpcc)
@@ -111,15 +120,17 @@ OUTER:
 
 	slog.InfoCtx(ctx, "reply count", "count", len(respList))
 
-	err = bsky.NotificationUpdateSeen(ctx, xrpcc, &bsky.NotificationUpdateSeen_Input{
-		SeenAt: now.Format(time.RFC3339Nano),
-	})
-	if err != nil {
-		slog.ErrorCtx(ctx, "error raised by app.bsky.notification.updateSeen", "error", err)
-		return nil, err
-	}
+	if unreadResp.Count != 0 {
+		err = bsky.NotificationUpdateSeen(ctx, xrpcc, &bsky.NotificationUpdateSeen_Input{
+			SeenAt: now.Format(time.RFC3339Nano),
+		})
+		if err != nil {
+			slog.ErrorCtx(ctx, "error raised by app.bsky.notification.updateSeen", "error", err)
+			return nil, err
+		}
 
-	slog.DebugCtx(ctx, "update notification seen", "now", now)
+		slog.DebugCtx(ctx, "update notification seen", "now", now)
+	}
 
 	return respList, nil
 }
