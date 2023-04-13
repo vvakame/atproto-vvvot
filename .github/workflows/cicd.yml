@@ -1,0 +1,156 @@
+name: 'CI & CD'
+
+on:
+  push:
+    branches:
+      - master
+  pull_request_target: {}
+
+env:
+  GCLOUD_VERSION: "424.0.0"
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # v3.5.0
+        with:
+          go-version-file: "go.mod"
+          cache: true
+      - name: Prepare dependencies
+        run: |-
+          go mod tidy
+      - name: Run tests
+        run: |-
+          go test -v ./...
+
+  docker-build:
+    name: Build docker image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    needs:
+      - test
+    if: |-
+      (github.event.pull_request.head.ref || github.ref) == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Extract git info
+        id: gitmeta
+        env:
+          GIT_REF: ${{ github.event.pull_request.head.ref || github.ref }}
+          GIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          echo ::set-output name=GIT_SHA::${GIT_SHA}
+          echo ::set-output name=GIT_REF::${GIT_REF}
+          if [[ "$GIT_REF" =~ ^refs/tags/ ]]; then
+            echo ::set-output name=GIT_TAG::${GIT_REF/refs\/tags\//}
+          fi
+          if [[ "$GIT_REF" =~ ^refs/heads/ ]]; then
+            echo ::set-output name=GIT_BRANCH::${GIT_REF/refs\/heads\//}
+          fi
+
+      - uses: google-github-actions/setup-gcloud@62d4898025f6041e16b1068643bfc5a696863587 # v1.1.0
+        with:
+          version: ${{ env.GCLOUD_VERSION }}
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@ef5d53e30bbcd8d0836f4288f5e50ff3e086997d # v1.0.0
+        with:
+          create_credentials_file: 'true'
+          workload_identity_provider: projects/205940128872/locations/global/workloadIdentityPools/github-actions/providers/gha-provider
+          service_account: cloudrun-deployer@atproto-vvvot.iam.gserviceaccount.com
+          access_token_lifetime: 1200s
+      - name: gcloud auth login by workload identity
+        env:
+          GCLOUD_CREDENTIAL_FILE: ${{ steps.auth.outputs.credentials_file_path }}
+        run: |-
+          gcloud auth login --brief --cred-file="${GCLOUD_CREDENTIAL_FILE}"
+
+      - name: Build & Push docker image
+        env:
+          GIT_TAG: ${{ steps.gitmeta.outputs.GIT_TAG }}
+          GIT_BRANCH: ${{ steps.gitmeta.outputs.GIT_BRANCH }}
+          GIT_SHA: ${{ steps.gitmeta.outputs.GIT_SHA }}
+          GCLOUD_CREDENTIAL_FILE: ${{ steps.auth.outputs.credentials_file_path }}
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+          GCP_PROJECT_ID=$(gcloud config get-value project)
+          GCP_IMAGE_TAG="us-central1-docker.pkg.dev/${GCP_PROJECT_ID}/server/server:commit-${GIT_SHA}"
+
+          docker build . --tag "${GCP_IMAGE_TAG}"
+          docker push "${GCP_IMAGE_TAG}"
+
+  deploy-cloudrun:
+    name: Deploy to Cloud Run
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    needs:
+      - test
+      - docker-build
+    if: |-
+      (github.event.pull_request.head.ref || github.ref) == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Extract git info
+        id:  gitmeta
+        env:
+          GIT_REF: ${{ github.event.pull_request.head.ref || github.ref }}
+          GIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          echo ::set-output name=GIT_SHA::${GIT_SHA}
+          echo ::set-output name=GIT_REF::${GIT_REF}
+          if [[ "$GIT_REF" =~ ^refs/tags/ ]]; then
+            echo ::set-output name=GIT_TAG::${GIT_REF/refs\/tags\//}
+          fi
+          if [[ "$GIT_REF" =~ ^refs/heads/ ]]; then
+            echo ::set-output name=GIT_BRANCH::${GIT_REF/refs\/heads\//}
+          fi
+
+      - uses: google-github-actions/setup-gcloud@62d4898025f6041e16b1068643bfc5a696863587 # v1.1.0
+        with:
+          version: ${{ env.GCLOUD_VERSION }}
+      - id: auth
+        name: Authenticate to Google Cloud for stg
+        uses: google-github-actions/auth@ef5d53e30bbcd8d0836f4288f5e50ff3e086997d # v1.0.0
+        with:
+          create_credentials_file: 'true'
+          workload_identity_provider: projects/205940128872/locations/global/workloadIdentityPools/github-actions/providers/gha-provider
+          service_account: cloudrun-deployer@atproto-vvvot.iam.gserviceaccount.com
+          access_token_lifetime: 1200s
+      - name: gcloud auth login by workload identity
+        env:
+          GCLOUD_CREDENTIAL_FILE: ${{ steps.auth.outputs.credentials_file_path }}
+        run: |-
+          gcloud auth login --brief --cred-file="${GCLOUD_CREDENTIAL_FILE}"
+
+      - name: Deploy
+        env:
+          GIT_TAG: ${{ steps.gitmeta.outputs.GIT_TAG }}
+          GIT_BRANCH: ${{ steps.gitmeta.outputs.GIT_BRANCH }}
+          GIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          GCLOUD_CREDENTIAL_FILE: ${{ steps.auth.outputs.credentials_file_path }}
+        run: |-
+          export GIT_SHA="$GITHUB_SHA"
+          export TAG=master
+
+          GCP_PROJECT_ID=$(gcloud config get-value project)
+          GCP_IMAGE_TAG="us-central1-docker.pkg.dev/${GCP_PROJECT_ID}/server/server:commit-${GIT_SHA}"
+          export GCP_PROJECT_ID
+          export GCP_IMAGE_TAG
+
+          ./deploy-cloudrun.sh
