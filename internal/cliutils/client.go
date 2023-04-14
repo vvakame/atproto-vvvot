@@ -2,6 +2,7 @@ package cliutils
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"time"
@@ -59,20 +60,22 @@ func CheckTokenExpired(ctx context.Context, xrpcc *xrpc.Client) error {
 	now := time.Now().Add(+1 * time.Minute)
 	if xrpcc.Auth.AccessJwt != "" {
 		token, err := jwt.ParseString(xrpcc.Auth.AccessJwt, jwt.WithVerify(false))
-		if err != nil {
+		if err != nil && !errors.Is(err, jwt.ErrTokenExpired()) {
 			return fmt.Errorf("faield to parse jwt: %w", err)
 		}
-		if token.Expiration().Before(now) {
+
+		if errors.Is(err, jwt.ErrTokenExpired()) || token.Expiration().Before(now) {
 			slog.DebugCtx(ctx, "accessJwt expired")
 			xrpcc.Auth.AccessJwt = ""
 		}
 	}
 	if xrpcc.Auth.RefreshJwt != "" {
 		token, err := jwt.ParseString(xrpcc.Auth.RefreshJwt, jwt.WithVerify(false))
-		if err != nil {
+		if err != nil && !errors.Is(err, jwt.ErrTokenExpired()) {
 			return fmt.Errorf("faield to parse jwt: %w", err)
 		}
-		if token.Expiration().Before(now) {
+
+		if errors.Is(err, jwt.ErrTokenExpired()) || token.Expiration().Before(now) {
 			slog.DebugCtx(ctx, "refreshJwt expired")
 			xrpcc.Auth.RefreshJwt = ""
 		}
