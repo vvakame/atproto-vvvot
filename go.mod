@@ -11,12 +11,12 @@ require (
 	github.com/lestrrat-go/jwx/v2 v2.0.9
 	github.com/vvakame/sdlog v1.1.1
 	go.opencensus.io v0.24.0
-	go.opentelemetry.io/contrib/detectors/gcp v1.15.0
+	go.opentelemetry.io/contrib/detectors/gcp v1.16.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.40.0
-	go.opentelemetry.io/otel v1.14.0
+	go.opentelemetry.io/otel v1.15.0
 	go.opentelemetry.io/otel/bridge/opencensus v0.37.0
-	go.opentelemetry.io/otel/sdk v1.14.0
-	go.opentelemetry.io/otel/trace v1.14.0
+	go.opentelemetry.io/otel/sdk v1.15.0
+	go.opentelemetry.io/otel/trace v1.15.0
 	golang.org/x/exp v0.0.0-20230321023759-10a507213a29
 )
 
