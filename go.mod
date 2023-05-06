@@ -14,7 +14,7 @@ require (
 	go.opentelemetry.io/contrib/detectors/gcp v1.16.1
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.40.0
 	go.opentelemetry.io/otel v1.15.1
-	go.opentelemetry.io/otel/bridge/opencensus v0.37.0
+	go.opentelemetry.io/otel/bridge/opencensus v0.38.1
 	go.opentelemetry.io/otel/sdk v1.15.1
 	go.opentelemetry.io/otel/trace v1.15.1
 	golang.org/x/exp v0.0.0-20230321023759-10a507213a29
@@ -86,8 +86,8 @@ require (
 	github.com/whyrusleeping/cbor-gen v0.0.0-20230331140348-1f892b517e70 // indirect
 	github.com/whyrusleeping/go-did v0.0.0-20230301193428-2146016fc220 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
-	go.opentelemetry.io/otel/metric v0.37.0 // indirect
-	go.opentelemetry.io/otel/sdk/metric v0.37.0 // indirect
+	go.opentelemetry.io/otel/metric v0.38.1 // indirect
+	go.opentelemetry.io/otel/sdk/metric v0.38.1 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
