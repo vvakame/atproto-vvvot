@@ -13,10 +13,10 @@ require (
 	go.opencensus.io v0.24.0
 	go.opentelemetry.io/contrib/detectors/gcp v0.15.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.41.1
-	go.opentelemetry.io/otel v1.15.1
+	go.opentelemetry.io/otel v1.16.0
 	go.opentelemetry.io/otel/bridge/opencensus v0.38.1
-	go.opentelemetry.io/otel/sdk v1.15.1
-	go.opentelemetry.io/otel/trace v1.15.1
+	go.opentelemetry.io/otel/sdk v1.16.0
+	go.opentelemetry.io/otel/trace v1.16.0
 	golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea
 )
 
@@ -84,7 +84,7 @@ require (
 	github.com/whyrusleeping/cbor-gen v0.0.0-20230331140348-1f892b517e70 // indirect
 	github.com/whyrusleeping/go-did v0.0.0-20230301193428-2146016fc220 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
-	go.opentelemetry.io/otel/metric v0.38.1 // indirect
+	go.opentelemetry.io/otel/metric v1.16.0 // indirect
 	go.opentelemetry.io/otel/sdk/metric v0.38.1 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
@@ -92,7 +92,7 @@ require (
 	golang.org/x/crypto v0.8.0 // indirect
 	golang.org/x/net v0.9.0 // indirect
 	golang.org/x/oauth2 v0.7.0 // indirect
-	golang.org/x/sys v0.7.0 // indirect
+	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/text v0.9.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/api v0.108.0 // indirect
