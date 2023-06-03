@@ -12,7 +12,7 @@ require (
 	github.com/vvakame/sdlog v1.1.2
 	go.opencensus.io v0.24.0
 	go.opentelemetry.io/contrib/detectors/gcp v0.15.0
-	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.41.1
+	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.42.0
 	go.opentelemetry.io/otel v1.16.0
 	go.opentelemetry.io/otel/bridge/opencensus v0.39.0
 	go.opentelemetry.io/otel/sdk v1.16.0
