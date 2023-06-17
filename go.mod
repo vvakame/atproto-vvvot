@@ -8,7 +8,7 @@ require (
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.39.0
 	github.com/bluesky-social/indigo v0.0.0-20230412180934-62ac17d84098
 	github.com/k0kubun/pp/v3 v3.2.0
-	github.com/lestrrat-go/jwx/v2 v2.0.9
+	github.com/lestrrat-go/jwx/v2 v2.0.11
 	github.com/vvakame/sdlog v1.1.2
 	go.opencensus.io v0.24.0
 	go.opentelemetry.io/contrib/detectors/gcp v0.15.0
@@ -25,7 +25,7 @@ require (
 	cloud.google.com/go/trace v1.8.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.39.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
-	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.1.0 // indirect
+	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.2.0 // indirect
 	github.com/felixge/httpsnoop v1.0.3 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -79,6 +79,7 @@ require (
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/polydawn/refmt v0.89.1-0.20221221234430-40501e09de1f // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
+	github.com/segmentio/asm v1.2.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/urfave/cli/v2 v2.25.1 // indirect
 	github.com/whyrusleeping/cbor-gen v0.0.0-20230331140348-1f892b517e70 // indirect
@@ -89,8 +90,8 @@ require (
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
-	golang.org/x/crypto v0.8.0 // indirect
-	golang.org/x/net v0.9.0 // indirect
+	golang.org/x/crypto v0.9.0 // indirect
+	golang.org/x/net v0.10.0 // indirect
 	golang.org/x/oauth2 v0.7.0 // indirect
 	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/text v0.9.0 // indirect
