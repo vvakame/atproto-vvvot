@@ -46,11 +46,11 @@ dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/DataDog/sketches-go v0.0.1/go.mod h1:Q5DbzQ+3AkgGwymQO7aZFNP7ns2lZKGtvRBzRXfdi60=
-github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.16.1 h1:dkIyFw11w878MSG5kegjr9Oept42iCjNvhO2BVRrr60=
-github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.16.1/go.mod h1:iyJ7cfLP5PVMo/55aIBBndyeFcMDXKUfbfZxaMM5GeU=
-github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/cloudmock v0.40.1 h1:Mkm1EDj1blE1U31XI4GOwhMrTK0czB2HouHKxzr2ORo=
-github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.40.1 h1:FFGWjWC0sCZgJziVe/yP39XjlQlf+MIEYXoRPJq8YX0=
-github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.40.1/go.mod h1:lz6DEePTxmjvYMtusOoS3qDAErC0STi/wmvqJucKY28=
+github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.17.0 h1:DwGeS/9k9xdpnvVQuJF+L9bYNFvBCmCWlDA8d8opoZY=
+github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.17.0/go.mod h1:SUVNJAkkyRKeM3L46/NhFGIz+Kx1zetN09qUs1XbMx8=
+github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/cloudmock v0.41.0 h1:ZJwvlTjB8GycSRpysdcRv3FztommLDUfgii0VUUp5ys=
+github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.41.0 h1:MWQ81b2TkSLbDpLINiKdZdoht1VMEHCKr4BSZpb/KQ8=
+github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.41.0/go.mod h1:lz6DEePTxmjvYMtusOoS3qDAErC0STi/wmvqJucKY28=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.40.1 h1:UNrOtOs5D+aEj0dtqp+2sAstD58zQJvtBxgoQmpqnEI=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.40.1/go.mod h1:ML9pY4SjdBE/fTBnIwTaJu+5ZahLW3e/snaUPuOdcck=
 github.com/benbjohnson/clock v1.0.3/go.mod h1:bGMdMPoPVvcYyt1gHDf4J2KE153Yf9BuiUKYMaxlTDM=
