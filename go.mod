@@ -5,7 +5,7 @@ go 1.20
 require (
 	cloud.google.com/go/compute/metadata v0.2.3
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.17.0
-	github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.41.0
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.42.0
 	github.com/bluesky-social/indigo v0.0.0-20230412180934-62ac17d84098
 	github.com/k0kubun/pp/v3 v3.2.0
 	github.com/lestrrat-go/jwx/v2 v2.0.11
