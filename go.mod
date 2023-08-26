@@ -5,7 +5,7 @@ toolchain go1.21.0
 
 require (
 	cloud.google.com/go/compute/metadata v0.2.3
-	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.18.0
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.19.0
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.42.0
 	github.com/bluesky-social/indigo v0.0.0-20230412180934-62ac17d84098
 	github.com/k0kubun/pp/v3 v3.2.0
@@ -23,8 +23,8 @@ require (
 
 require (
 	cloud.google.com/go/compute v1.23.0 // indirect
-	cloud.google.com/go/trace v1.9.0 // indirect
-	github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.42.0 // indirect
+	cloud.google.com/go/trace v1.10.1 // indirect
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.43.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.2.0 // indirect
 	github.com/felixge/httpsnoop v1.0.3 // indirect
@@ -101,11 +101,11 @@ require (
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/api v0.126.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20230530153820-e85fd2cbaebc // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20230530153820-e85fd2cbaebc // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20230530153820-e85fd2cbaebc // indirect
-	google.golang.org/grpc v1.55.0 // indirect
-	google.golang.org/protobuf v1.30.0 // indirect
+	google.golang.org/genproto v0.0.0-20230731193218-e0aa005b6bdf // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20230726155614-23370e0ffb3e // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20230731190214-cbb8c96f2d6d // indirect
+	google.golang.org/grpc v1.57.0 // indirect
+	google.golang.org/protobuf v1.31.0 // indirect
 	gorm.io/driver/postgres v1.5.0 // indirect
 	gorm.io/driver/sqlite v1.5.0 // indirect
 	gorm.io/gorm v1.25.0 // indirect
