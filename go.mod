@@ -7,7 +7,7 @@ require (
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.32.0
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.56.0
 	github.com/bluesky-social/indigo v0.0.0-20230412180934-62ac17d84098
-	github.com/k0kubun/pp/v3 v3.2.0
+	github.com/k0kubun/pp/v3 v3.5.1
 	github.com/lestrrat-go/jwx/v2 v2.1.6
 	github.com/vvakame/sdlog v1.2.0
 	go.opencensus.io v0.24.0
@@ -67,8 +67,8 @@ require (
 	github.com/lestrrat-go/httprc v1.0.6 // indirect
 	github.com/lestrrat-go/iter v1.0.2 // indirect
 	github.com/lestrrat-go/option v1.0.1 // indirect
-	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.18 // indirect
+	github.com/mattn/go-colorable v0.1.14 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-sqlite3 v1.14.16 // indirect
 	github.com/minio/sha256-simd v1.0.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
