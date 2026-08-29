@@ -59,7 +59,7 @@ jobs:
             echo ::set-output name=GIT_BRANCH::${GIT_REF/refs\/heads\//}
           fi
 
-      - uses: google-github-actions/setup-gcloud@62d4898025f6041e16b1068643bfc5a696863587 # v1.1.0
+      - uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
         with:
           version: ${{ env.GCLOUD_VERSION }}
       - id: auth
@@ -121,7 +121,7 @@ jobs:
             echo ::set-output name=GIT_BRANCH::${GIT_REF/refs\/heads\//}
           fi
 
-      - uses: google-github-actions/setup-gcloud@62d4898025f6041e16b1068643bfc5a696863587 # v1.1.0
+      - uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
         with:
           version: ${{ env.GCLOUD_VERSION }}
       - id: auth
