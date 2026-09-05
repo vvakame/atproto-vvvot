@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	cloud.google.com/go/compute/metadata v0.9.0
-	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.36.0
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.37.0
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.61.0
 	github.com/bluesky-social/indigo v0.0.0-20230412180934-62ac17d84098
 	github.com/k0kubun/pp/v3 v3.5.2
@@ -25,7 +25,7 @@ require (
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
 	cloud.google.com/go/trace v1.16.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.35.0 // indirect
-	github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.60.0 // indirect
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.61.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.1 // indirect
