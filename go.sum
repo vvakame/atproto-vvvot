@@ -23,8 +23,8 @@ github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/cloudmock v0
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/cloudmock v0.60.0/go.mod h1:V9g30lTKzfUsEW+gpWssck6u9IhARajmipodImLLcwI=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.60.0 h1:Oblia1QXBJlM/wOY9ARRUtsXdDYiMCzk3eCMikqoLbI=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.60.0/go.mod h1:SRAbhyZ4R4FagHMM9VtRgSY/lheRoht2fKelZXQUenk=
-github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.59.0 h1:qkIrO8aDwTenWjMRObvOwx8XFnrHR4nO8rHhigtE+3M=
-github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.59.0/go.mod h1:gW2WKecnAdBKF4E64jL86UXyvVcsPnNunINOq72OLMk=
+github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.61.0 h1:BlaRk2cPJNsOCAwSNGpNFz75AieLH/t22bjKB/n/zME=
+github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.61.0/go.mod h1:AdkhdCuEn0PHN0/RiyworzQZlk33fJJDalyZSdOXcm4=
 github.com/benbjohnson/clock v1.1.0 h1:Q92kusRqC1XV2MjkWETPvjJVqKetz1OzxZB7mHJLju8=
 github.com/benbjohnson/clock v1.1.0/go.mod h1:J11/hYXuz8f4ySSvYwY0FKfm+ezbsZBKZxNJlLklBHA=
 github.com/bluesky-social/indigo v0.0.0-20230412180934-62ac17d84098 h1:rfYX98sc7BCbxCs4B7hVwAoBZie7ayz/FRzfdSBkpH4=
