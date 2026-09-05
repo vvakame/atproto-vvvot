@@ -1,11 +1,11 @@
 module github.com/vvakame/atproto-vvvot
 
-go 1.25.0
+go 1.26.0
 
 require (
 	cloud.google.com/go/compute/metadata v0.9.0
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.36.0
-	github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.59.0
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.61.0
 	github.com/bluesky-social/indigo v0.0.0-20230412180934-62ac17d84098
 	github.com/k0kubun/pp/v3 v3.5.2
 	github.com/lestrrat-go/jwx/v2 v2.1.7
