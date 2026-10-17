@@ -7,7 +7,7 @@ require (
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.38.0
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/propagator v0.62.0
 	github.com/bluesky-social/indigo v0.0.0-20230412180934-62ac17d84098
-	github.com/k0kubun/pp/v3 v3.5.2
+	github.com/k0kubun/pp/v3 v3.5.3
 	github.com/lestrrat-go/jwx/v2 v2.1.7
 	github.com/vvakame/sdlog v1.2.0
 	go.opencensus.io v0.24.0
@@ -98,9 +98,9 @@ require (
 	golang.org/x/crypto v0.54.0 // indirect
 	golang.org/x/net v0.56.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
-	golang.org/x/sync v0.22.0 // indirect
+	golang.org/x/sync v0.23.0 // indirect
 	golang.org/x/sys v0.48.0 // indirect
-	golang.org/x/text v0.40.0 // indirect
+	golang.org/x/text v0.42.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/api v0.280.0 // indirect
